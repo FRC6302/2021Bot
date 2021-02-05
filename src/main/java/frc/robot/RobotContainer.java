@@ -18,7 +18,7 @@ import frc.robot.commands.Move;
 import frc.robot.commands.SeekLeft;
 import frc.robot.commands.SeekRight;
 import frc.robot.commands.TurnRight90;
-import frc.robot.commands.TurnRight902;
+import frc.robot.commands.TurnRight;
 import frc.robot.commands.TurnToYawZero;
 import frc.robot.commands.ZeroYaw;
 import frc.robot.subsystems.DriveTrain;
@@ -50,7 +50,7 @@ public class RobotContainer {
   private final ZeroYaw zeroYaw;
   private final TurnToYawZero turnToYawZero;
   private final TurnRight90 turnRight90;
-  private final TurnRight902 turnRight902;
+  private final TurnRight turnRight;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -85,8 +85,8 @@ public class RobotContainer {
     turnToYawZero.addRequirements(driveTrain);
     turnRight90 = new TurnRight90(driveTrain);
     turnRight90.addRequirements(driveTrain);
-    turnRight902 = new TurnRight902(driveTrain);
-    turnRight902.addRequirements(driveTrain);
+    turnRight = new TurnRight(driveTrain);
+    turnRight.addRequirements(driveTrain);
   }
 
   public double getDriverRawAxis(final int axis){
@@ -142,7 +142,7 @@ public class RobotContainer {
     turnToYawZeroButton.whileHeld(new TurnToYawZero(driveTrain));
 
     final JoystickButton turnRight902Button = new JoystickButton(driverController, Constants.turnRight90Button);
-    turnRight902Button.whileHeld(new TurnRight902(driveTrain));
+    turnRight902Button.whileHeld(new TurnRight(driveTrain));
   }
 
 

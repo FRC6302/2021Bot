@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX;
 
-public class TurnRight902 extends PIDCommand {
+public class TurnRight extends PIDCommand {
   static final double kp = 0.02; //0.02
   static final double ki = 0.001; //0.001
   static final double kd = 0.003; //0.003
@@ -24,9 +24,21 @@ public class TurnRight902 extends PIDCommand {
   /**
    * Creates a new TurnRight902.
    */
-  public TurnRight902(DriveTrain driveTrain) {
+  public TurnRight(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     super(new PIDController(kp, ki, kd), NavX::getGyroYaw, 90.0, driveTrain::usePIDOutput, driveTrain); 
+    NavX.zeroGyroYaw(); 
+    // Set the controller to be continuous (because it is an angle controller)
+     getController().enableContinuousInput(-180, 180);
+     // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
+     // setpoint before it is considered as having reached the reference
+     getController().setTolerance(positionTolerance, velocityTolerance);
+     SmartDashboard.putNumber("testNumber", NavX.getGyroYaw());
+  }
+
+  public TurnRight(DriveTrain driveTrain, double targetAngle) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    super(new PIDController(kp, ki, kd), NavX::getGyroYaw, targetAngle, driveTrain::usePIDOutput, driveTrain); 
     NavX.zeroGyroYaw(); 
     // Set the controller to be continuous (because it is an angle controller)
      getController().enableContinuousInput(-180, 180);
