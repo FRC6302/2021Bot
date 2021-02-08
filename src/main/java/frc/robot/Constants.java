@@ -79,10 +79,12 @@ public final class Constants {
     //driver contoller buttons
     public static final int limelightTargetButton = Constants.aButton;
     public static final int moveButton = Constants.xButton;
+    public static final int moveStraightButton = Constants.xButton;
 	public static final int limelightGetInRangeButton = Constants.bButton;
 	public static final int zeroYawButton = Constants.yButton;
 	public static final int turnToYawZeroButton = Constants.rightBumper;
-	public static final int turnRight90Button = Constants.leftBumper;
+	public static final int turnRightButton = Constants.leftBumper;
+	
 	
 	
 }

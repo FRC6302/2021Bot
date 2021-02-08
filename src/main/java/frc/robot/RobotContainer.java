@@ -10,17 +10,22 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutonBarrelRoll;
 import frc.robot.commands.DriveGTA;
 import frc.robot.commands.GetInRange;
 import frc.robot.commands.Move;
+import frc.robot.commands.MoveStraight;
 import frc.robot.commands.SeekLeft;
 import frc.robot.commands.SeekRight;
 import frc.robot.commands.TurnRight90;
 import frc.robot.commands.TurnRight;
 import frc.robot.commands.TurnToYawZero;
 import frc.robot.commands.ZeroYaw;
+import frc.robot.commands.ZeroYawAndTurnRight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX;
 
@@ -51,7 +56,12 @@ public class RobotContainer {
   private final TurnToYawZero turnToYawZero;
   private final TurnRight90 turnRight90;
   private final TurnRight turnRight;
-
+  private final ZeroYawAndTurnRight zeroYawAndTurnRight;
+  private final MoveStraight moveStraight;
+  
+  AutonBarrelRoll autonBarrelRoll;
+  SendableChooser<Command> chooser = new SendableChooser<>();
+  //Smart Dashboard cannot be set to "Editable" if you want to select an option
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -87,6 +97,19 @@ public class RobotContainer {
     turnRight90.addRequirements(driveTrain);
     turnRight = new TurnRight(driveTrain);
     turnRight.addRequirements(driveTrain);
+    zeroYawAndTurnRight = new ZeroYawAndTurnRight(driveTrain);
+    zeroYawAndTurnRight.addRequirements(driveTrain);
+    moveStraight = new MoveStraight(driveTrain);
+    moveStraight.addRequirements(driveTrain);
+
+    autonBarrelRoll = new AutonBarrelRoll(driveTrain);
+    autonBarrelRoll.addRequirements(driveTrain);
+
+    chooser.addOption("Auton Barrel Roll", autonBarrelRoll);
+    chooser.addOption("move", move);
+    //chooser.setDefaultOption("moveDefault", move);
+    SmartDashboard.putData("Auton Chooser", chooser);
+    
   }
 
   public double getDriverRawAxis(final int axis){
@@ -128,8 +151,8 @@ public class RobotContainer {
     //limelightTargetButton.whileHeld(new SeekLeft(driveTrain));
     limelightTargetButton.whileHeld(new SeekRight(driveTrain));
 
-    final JoystickButton moveButton = new JoystickButton(driverController, Constants.moveButton);
-    moveButton.whenPressed(new Move(driveTrain, 0.3, -0.3, 1));
+    //final JoystickButton moveButton = new JoystickButton(driverController, Constants.moveButton);
+    //moveButton.whenPressed(new Move(driveTrain, 0.3, -0.3, 1));
 
     final JoystickButton limelightGetInRangeButton = new 
       JoystickButton(driverController, Constants.limelightGetInRangeButton);
@@ -141,8 +164,11 @@ public class RobotContainer {
     final JoystickButton turnToYawZeroButton = new JoystickButton(driverController, Constants.turnToYawZeroButton);
     turnToYawZeroButton.whileHeld(new TurnToYawZero(driveTrain));
 
-    final JoystickButton turnRight902Button = new JoystickButton(driverController, Constants.turnRight90Button);
-    turnRight902Button.whileHeld(new TurnRight(driveTrain));
+    final JoystickButton turnRightButton = new JoystickButton(driverController, Constants.turnRightButton);
+    turnRightButton.whileHeld(new ZeroYawAndTurnRight(driveTrain));
+
+    final JoystickButton moveStraightButton = new JoystickButton(driverController, Constants.moveStraightButton);
+    moveStraightButton.whenPressed(new MoveStraight(driveTrain, 1, 1));
   }
 
 
@@ -153,6 +179,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return move;
+    return chooser.getSelected();
   }
 }
