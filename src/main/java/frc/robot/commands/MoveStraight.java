@@ -15,9 +15,9 @@ import frc.robot.subsystems.NavX;
 
 public class MoveStraight extends CommandBase {
   DriveTrain driveTrain;
-  double speed, moveTime;
+  double leftCommand, rightCommand, speed, moveTime;
   Timer timer;
-  double initialYaw;
+  double initialYaw, currentYaw;
   double motorInput;
   private boolean finished = false;
   
@@ -50,9 +50,11 @@ public class MoveStraight extends CommandBase {
     timer.start();
     while(timer.get() < moveTime)
     {
-      motorInput = (initialYaw - NavX.getGyroYaw()) / 100;
-      driveTrain.setLeftMotors(motorInput);
-      driveTrain.setRightMotors(motorInput);
+      currentYaw = NavX.getGyroYaw();
+      leftCommand = speed + ((initialYaw - currentYaw) / 40);
+      rightCommand = speed - ((initialYaw - currentYaw) / 40);
+      driveTrain.setLeftMotors(leftCommand);
+      driveTrain.setRightMotors(rightCommand);
     }
     finished = true;
   }

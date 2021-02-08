@@ -168,7 +168,7 @@ public class RobotContainer {
     turnRightButton.whileHeld(new ZeroYawAndTurnRight(driveTrain));
 
     final JoystickButton moveStraightButton = new JoystickButton(driverController, Constants.moveStraightButton);
-    moveStraightButton.whenPressed(new MoveStraight(driveTrain, 1, 1));
+    moveStraightButton.whenPressed(new MoveStraight(driveTrain, 0.3, 5));
   }
 
 
