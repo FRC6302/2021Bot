@@ -24,7 +24,11 @@ public final class Constants {
     public static final int motorLeftLShooterValue = 90;
 	public static final int motorLeftRShooterValue = 91;
 	public static final int motorRightLShooterValue = 92;
-	public static final int motorRightRShooterValue = 93;
+    public static final int motorRightRShooterValue = 93;
+    public static final int mecMotorL1Value = 90; //TODO: change before running mecanum
+	public static final int mecMotorL2Value = 91;
+	public static final int mecMotorR1Value = 91;
+	public static final int mecMotorR2Value = 93;
 
     //controller values
     public static final int leftTrigger = 2;
@@ -84,6 +88,7 @@ public final class Constants {
 	public static final int zeroYawButton = Constants.yButton;
 	public static final int turnToYawZeroButton = Constants.rightBumper;
 	public static final int turnRightButton = Constants.leftBumper;
+	
 	
 	
 	

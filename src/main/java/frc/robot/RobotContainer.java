@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonBarrelRoll;
 import frc.robot.commands.DriveGTA;
+import frc.robot.commands.DriveMec;
 import frc.robot.commands.GetInRange;
 import frc.robot.commands.Move;
 import frc.robot.commands.MoveStraight;
@@ -27,6 +28,7 @@ import frc.robot.commands.TurnToYawZero;
 import frc.robot.commands.ZeroYaw;
 import frc.robot.commands.ZeroYawAndTurnRight;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.MecDriveTrain;
 import frc.robot.subsystems.NavX;
 
 /**
@@ -44,6 +46,8 @@ public class RobotContainer {
 
   private final DriveTrain driveTrain;
   private final DriveGTA driveGTA;
+  private final MecDriveTrain mecDriveTrain;
+  private final DriveMec driveMec;
 
   private final SeekLeft seekLeft;
   private final SeekRight seekRight;
@@ -69,12 +73,18 @@ public class RobotContainer {
     // Configure the button bindings
     driverController = new XboxController(Constants.driverControllerPort);
     //operatorController = new XboxController(Constants.operatorControllerPort);
+    
 
     driveTrain = new DriveTrain();
     driveGTA = new DriveGTA(driveTrain);
     driveGTA.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveGTA);
-    configureButtonBindings();
+    //configure buttons was here
+
+    mecDriveTrain = new MecDriveTrain();
+    driveMec = new DriveMec(mecDriveTrain);
+    driveMec.addRequirements(mecDriveTrain);
+    mecDriveTrain.setDefaultCommand(driveMec);
 
     seekLeft = new SeekLeft(driveTrain);
     seekLeft.addRequirements(driveTrain);
@@ -109,7 +119,9 @@ public class RobotContainer {
     chooser.addOption("move", move);
     //chooser.setDefaultOption("moveDefault", move);
     SmartDashboard.putData("Auton Chooser", chooser);
-    
+
+
+    configureButtonBindings();
   }
 
   public double getDriverRawAxis(final int axis){
