@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonBarrelRoll;
 import frc.robot.commands.DriveGTA;
-import frc.robot.commands.DriveMec;
 import frc.robot.commands.GetInRange;
 import frc.robot.commands.Move;
 import frc.robot.commands.MoveStraight;
@@ -25,10 +24,8 @@ import frc.robot.commands.SeekRight;
 import frc.robot.commands.TurnRight90;
 import frc.robot.commands.TurnRight;
 import frc.robot.commands.TurnToYawZero;
-import frc.robot.commands.ZeroYaw;
 import frc.robot.commands.ZeroYawAndTurnRight;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.MecDriveTrain;
 import frc.robot.subsystems.NavX;
 
 /**
@@ -46,8 +43,8 @@ public class RobotContainer {
 
   private final DriveTrain driveTrain;
   private final DriveGTA driveGTA;
-  private final MecDriveTrain mecDriveTrain;
-  private final DriveMec driveMec;
+  //private final MecDriveTrain mecDriveTrain;
+  //private final DriveMec driveMec;
 
   private final SeekLeft seekLeft;
   private final SeekRight seekRight;
@@ -56,7 +53,6 @@ public class RobotContainer {
   private final Move move;
 
   private final NavX navX;
-  private final ZeroYaw zeroYaw;
   private final TurnToYawZero turnToYawZero;
   private final TurnRight90 turnRight90;
   private final TurnRight turnRight;
@@ -81,10 +77,10 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(driveGTA);
     //configure buttons was here
 
-    mecDriveTrain = new MecDriveTrain();
-    driveMec = new DriveMec(mecDriveTrain);
-    driveMec.addRequirements(mecDriveTrain);
-    mecDriveTrain.setDefaultCommand(driveMec);
+    //mecDriveTrain = new MecDriveTrain();
+    //driveMec = new DriveMec(mecDriveTrain);
+    //driveMec.addRequirements(mecDriveTrain);
+    //mecDriveTrain.setDefaultCommand(driveMec);
 
     seekLeft = new SeekLeft(driveTrain);
     seekLeft.addRequirements(driveTrain);
@@ -98,11 +94,10 @@ public class RobotContainer {
     move = new Move(driveTrain);
     move.addRequirements(driveTrain);
 
-    navX = new NavX();
-    zeroYaw = new ZeroYaw();
-    zeroYaw.addRequirements(navX); //dont know if this line if required because gyro is a static variable
+    navX = new NavX(); //NavX class must be instantiated or the code will never run and it wont give values
     turnToYawZero = new TurnToYawZero(driveTrain);
-    turnToYawZero.addRequirements(driveTrain);
+    turnToYawZero.addRequirements(driveTrain, navX); 
+    //just added this requirement so i dont get an error saying that navX is not used. Is not needed
     turnRight90 = new TurnRight90(driveTrain);
     turnRight90.addRequirements(driveTrain);
     turnRight = new TurnRight(driveTrain);
@@ -171,7 +166,7 @@ public class RobotContainer {
     limelightGetInRangeButton.whileHeld(new GetInRange(driveTrain));
 
     final JoystickButton zeroYawButton = new JoystickButton(driverController, Constants.zeroYawButton);
-    zeroYawButton.whenPressed(new ZeroYaw());
+    zeroYawButton.whenPressed(NavX::zeroGyroYaw); //this is a method reference
 
     final JoystickButton turnToYawZeroButton = new JoystickButton(driverController, Constants.turnToYawZeroButton);
     turnToYawZeroButton.whileHeld(new TurnToYawZero(driveTrain));

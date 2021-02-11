@@ -26,8 +26,7 @@ public class TurnRight extends PIDCommand {
    */
   public TurnRight(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-    super(new PIDController(kp, ki, kd), NavX::getGyroYaw, 90.0, driveTrain::usePIDOutput, driveTrain); 
-    NavX.zeroGyroYaw(); 
+    super(new PIDController(kp, ki, kd), NavX::getGyroYaw, 90.0, driveTrain::usePIDOutput, driveTrain);  
     // Set the controller to be continuous (because it is an angle controller)
      getController().enableContinuousInput(-180, 180);
      // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
@@ -39,7 +38,6 @@ public class TurnRight extends PIDCommand {
   public TurnRight(DriveTrain driveTrain, double targetAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     super(new PIDController(kp, ki, kd), NavX::getGyroYaw, targetAngle, driveTrain::usePIDOutput, driveTrain); 
-    NavX.zeroGyroYaw(); 
     // Set the controller to be continuous (because it is an angle controller)
      getController().enableContinuousInput(-180, 180);
      // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
