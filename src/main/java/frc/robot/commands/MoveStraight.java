@@ -44,8 +44,13 @@ public class MoveStraight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
     //it moves at the same angle that it started at, so the initial has to be recorded for comparison to current
-    initialYaw = NavX.getGyroYaw();
+      initialYaw = NavX.getGyroYaw();
     timer.reset();
     timer.start();
     while(timer.get() < moveTime)
@@ -57,11 +62,6 @@ public class MoveStraight extends CommandBase {
       driveTrain.setRightMotors(rightCommand);
     }
     finished = true;
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
   }
 
   // Called once the command ends or is interrupted.

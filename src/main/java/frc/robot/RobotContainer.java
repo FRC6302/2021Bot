@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonBarrelRoll;
+import frc.robot.commands.AutonBouncePath;
 import frc.robot.commands.DriveGTA;
 import frc.robot.commands.GetInRange;
 import frc.robot.commands.Move;
@@ -25,6 +26,7 @@ import frc.robot.commands.TurnRight90;
 import frc.robot.commands.TurnRight;
 import frc.robot.commands.TurnToYawZero;
 import frc.robot.commands.ZeroYawAndTurnRight;
+import frc.robot.subsystems.BatteryVoltage;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX;
 
@@ -58,10 +60,14 @@ public class RobotContainer {
   private final TurnRight turnRight;
   private final ZeroYawAndTurnRight zeroYawAndTurnRight;
   private final MoveStraight moveStraight;
+
+  private final BatteryVoltage batteryVoltage;
   
   AutonBarrelRoll autonBarrelRoll;
+  AutonBouncePath autonBouncePath;
   SendableChooser<Command> chooser = new SendableChooser<>();
-  //Smart Dashboard cannot be set to "Editable" if you want to select an option
+  //Smart Dashboard cannot be set to "Editable" if you want to select an option for auton
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -107,14 +113,17 @@ public class RobotContainer {
     moveStraight = new MoveStraight(driveTrain);
     moveStraight.addRequirements(driveTrain);
 
+    batteryVoltage = new BatteryVoltage();
+
     autonBarrelRoll = new AutonBarrelRoll(driveTrain);
     autonBarrelRoll.addRequirements(driveTrain);
+    autonBouncePath = new AutonBouncePath(driveTrain);
+    autonBouncePath.addRequirements(driveTrain, batteryVoltage); //doesnt actually need battery, I just dont want errors
 
     chooser.addOption("Auton Barrel Roll", autonBarrelRoll);
-    chooser.addOption("move", move);
-    //chooser.setDefaultOption("moveDefault", move);
+    chooser.addOption("Auton Bounce Path", autonBouncePath);
+    chooser.setDefaultOption("Move (is default)", move);
     SmartDashboard.putData("Auton Chooser", chooser);
-
 
     configureButtonBindings();
   }

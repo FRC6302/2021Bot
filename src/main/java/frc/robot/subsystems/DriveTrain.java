@@ -22,8 +22,8 @@ public class DriveTrain extends SubsystemBase {
   PROBABLY SKIP SOME OF THE STRING STUFF, BUT IT'S STILL GOOD TO KNOW. GOOD LUCK :) -SAMUEL
   */
 
-  //REFRAIN FROM USING WAIT() FUNCTIONS IF POSSIBLE BECAUSE IT MESSES WITH THE HOW THE FRC
-  //STUFF WORKS. IT MIGHT CAUSE WEIRD ERRORS
+  //REFRAIN FROM USING WAIT() FUNCTIONS ANYWHERE IF POSSIBLE BECAUSE IT MESSES WITH THE HOW THE FRC
+  //STUFF WORKS AND UPDATES. IT MIGHT CAUSE WEIRD ERRORS
 
   TalonSRX motorL1;
   TalonSRX motorL2;
@@ -52,7 +52,7 @@ public class DriveTrain extends SubsystemBase {
   public void setLeftMotors(double speed){
     //motorL1.setNeutralMode(NeutralMode.Coast);
     //motorL2.setNeutralMode(NeutralMode.Coast);
-    
+  
     motorL1.set(ControlMode.PercentOutput, speed);
     motorL2.set(ControlMode.PercentOutput, speed);
   }
@@ -64,6 +64,14 @@ public class DriveTrain extends SubsystemBase {
 
     motorR1.set(ControlMode.PercentOutput, -speed);
     motorR2.set(ControlMode.PercentOutput, -speed);
+  }
+
+  public void Move(double leftCommand, double rightCommand, double time) {
+    //TO DO: see if this works
+  }
+
+  public void MoveStraight(double leftCommand, double rightCommand, double time) {
+    
   }
 
   double PIDDivisor = 1;
@@ -83,6 +91,5 @@ public class DriveTrain extends SubsystemBase {
     motorL2.set(ControlMode.PercentOutput, 0);
     motorR1.set(ControlMode.PercentOutput, 0);
     motorR2.set(ControlMode.PercentOutput, 0);
-    
   }
 }

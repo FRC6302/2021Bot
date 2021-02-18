@@ -24,7 +24,7 @@ public class ZeroYawAndTurnRight extends SequentialCommandGroup {
     super(new InstantCommand(NavX::zeroGyroYaw), new TurnRight(driveTrain));
     //zeroes yaw then turns right
     /* 
-    using a method reference here so i dont need an entire ZeroYaw subsystem to just do one thing. 
+    Using a method reference here so i dont need an entire ZeroYaw subsystem to just do one thing. 
     The super() call doesnt allow method reference arguments so you have to make it inside an instant command
     */
   }

@@ -7,35 +7,33 @@
 
 package frc.robot.subsystems;
 
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class NavX extends SubsystemBase {
-  static AHRS gyro = new AHRS(SPI.Port.kMXP);
+public class BatteryVoltage extends SubsystemBase {
+  static double initBatteryVoltage = RobotController.getBatteryVoltage();
+  static double curBatteryVoltage;
+
   /**
-   * Creates a new NavX.
+   * Creates a new BatteryVoltage.
    */
-  public NavX() {
+  public BatteryVoltage() { //never instantiated so nothing in constructor
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("gyroYaw", getGyroYaw());
-    SmartDashboard.putBoolean("gyroIsCalibrating", gyroIsCalibrating());
+    curBatteryVoltage = RobotController.getBatteryVoltage();
+    SmartDashboard.putNumber("current battery voltage", curBatteryVoltage);
+    SmartDashboard.putNumber("initial battery voltage", initBatteryVoltage);
   }
 
-  public static double getGyroYaw() { //yaw is rotation left or right
-    return gyro.getYaw(); 
+  public static double getCurBatteryVoltage() {
+    return RobotController.getBatteryVoltage();
   }
 
-  public static void zeroGyroYaw() {
-    gyro.zeroYaw();
-  }
-
-  public static boolean gyroIsCalibrating() {
-    return gyro.isCalibrating();
+  public static double getInitBatteryVoltage() {
+    return initBatteryVoltage;
   }
 }
