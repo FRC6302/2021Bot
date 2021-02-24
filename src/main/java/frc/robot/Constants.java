@@ -29,7 +29,8 @@ public final class Constants {
 	public static final int mecMotorL2Value = 91;
 	public static final int mecMotorR1Value = 91;
 	public static final int mecMotorR2Value = 93;
-
+    public static final int motorIntakeValue = 94;
+    
     //controller values
     public static final int leftTrigger = 2;
     public static final int rightTrigger = 3;
@@ -57,6 +58,9 @@ public final class Constants {
     public static final double limelightTargetXSpeed = 0.2;
     public static final double limelightGetInRangeSpeed = 0.2;
     public static final double limelightTargetArea = 0.3;
+
+    //intake
+    public static final double intakeSpeed = 0;
     
     //Move command
     public static final int MoveTime = 1;
@@ -88,6 +92,7 @@ public final class Constants {
 	public static final int zeroYawButton = Constants.yButton;
 	public static final int turnToYawZeroButton = Constants.rightBumper;
 	public static final int turnRightButton = Constants.leftBumper;
+	
 	
 	
 	

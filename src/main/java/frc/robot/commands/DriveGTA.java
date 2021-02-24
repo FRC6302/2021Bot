@@ -42,13 +42,13 @@ public class DriveGTA extends CommandBase {
   public void execute() {
     double scaledStickInput = Robot.robotContainer.getDriverDeadzoneAxis(Constants.leftStickX) * Constants.turningRate;
     
-    //double triggerVal = Robot.robotContainer.getDriverRawAxis(Constants.rightTrigger) 
-    //- Robot.robotContainer.getDriverRawAxis(Constants.leftTrigger);
+    double triggerVal = Robot.robotContainer.getDriverRawAxis(Constants.rightTrigger) 
+    - Robot.robotContainer.getDriverRawAxis(Constants.leftTrigger);
     
     //squaring the trigger values make them less sensitive when you barely press down on them. 
-    double rightTriggerSquared = Math.pow(Robot.robotContainer.getDriverRawAxis(Constants.rightTrigger), 2);
-    double leftTriggerSquared = Math.pow(Robot.robotContainer.getDriverRawAxis(Constants.leftTrigger), 2);
-    double triggerVal = rightTriggerSquared - leftTriggerSquared;
+    //double rightTriggerSquared = Math.pow(Robot.robotContainer.getDriverRawAxis(Constants.rightTrigger), 2);
+    //double leftTriggerSquared = Math.pow(Robot.robotContainer.getDriverRawAxis(Constants.leftTrigger), 2);
+    //double triggerVal = rightTriggerSquared - leftTriggerSquared;
 
     driveTrain.setLeftMotors(triggerVal + scaledStickInput);
     driveTrain.setRightMotors(triggerVal - scaledStickInput);

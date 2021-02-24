@@ -18,7 +18,7 @@ public class BatteryVoltage extends SubsystemBase {
   /**
    * Creates a new BatteryVoltage.
    */
-  public BatteryVoltage() { //never instantiated so nothing in constructor
+  public BatteryVoltage() { //class is never instantiated so need for constructor
   }
 
   @Override

@@ -67,7 +67,7 @@ public class Shooter extends SubsystemBase {
     leftREncoder = new Encoder(92, 93); 
     rightLEncoder = new Encoder(94, 95); 
     rightREncoder = new Encoder(96, 97);
-    //THESE NUMBERS ARE DIO PINS ON THE RIO IM PRETTY SURE. TODO: FIGURE THIS OUT BEFORE RUNNING ENCODERS
+    //THESE NUMBERS ARE DIO PINS ON THE RIO IM PRETTY SURE. TO DO: FIGURE THIS OUT BEFORE RUNNING ENCODERS
 
     //distance per pulse is pi * (wheel diameter / counts per revolution) according to Andymark example code
     //counts per rev is 1024 for our encoder according to Andymark example code

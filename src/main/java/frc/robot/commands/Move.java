@@ -46,8 +46,13 @@ public class Move extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    //setTimeout(m_time);
+  public void initialize() {   
+  }
+  
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
     timer.reset();
     timer.start();
     while(timer.get() < moveTime)
@@ -56,12 +61,6 @@ public class Move extends CommandBase {
       driveTrain.setRightMotors(rightCommand);
     }
     finished = true;
-  }
-  
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
   }
 
   // Called once the command ends or is interrupted.

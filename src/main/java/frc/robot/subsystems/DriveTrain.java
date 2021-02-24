@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class DriveTrain extends SubsystemBase {
@@ -42,6 +43,12 @@ public class DriveTrain extends SubsystemBase {
     //motorL2.setInverted(false);
     //motorR1.setInverted(false);
     //motorR2.setInverted(false);
+
+    motorL1.setNeutralMode(NeutralMode.Brake);
+    motorL2.setNeutralMode(NeutralMode.Brake);
+    motorR1.setNeutralMode(NeutralMode.Brake);
+    motorR2.setNeutralMode(NeutralMode.Brake);    
+    
   }
 
   @Override
@@ -66,13 +73,14 @@ public class DriveTrain extends SubsystemBase {
     motorR2.set(ControlMode.PercentOutput, -speed);
   }
 
+  /*
+  //dont know if it would save time to do this instead of Move() and MoveStraight() commands
   public void Move(double leftCommand, double rightCommand, double time) {
-    //TO DO: see if this works
   }
 
-  public void MoveStraight(double leftCommand, double rightCommand, double time) {
-    
+  public void MoveStraight(double leftCommand, double rightCommand, double time) {  
   }
+  */
 
   double PIDDivisor = 1;
   public void usePIDOutput(double output) {

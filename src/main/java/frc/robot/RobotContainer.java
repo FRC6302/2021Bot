@@ -48,6 +48,15 @@ public class RobotContainer {
   //private final MecDriveTrain mecDriveTrain;
   //private final DriveMec driveMec;
 
+  /*
+  private final Shooter shooter;
+  private final Shooter feeder;
+  private final Shoot shoot;
+  private final Feed feed;
+  private final ShootAndFeed shootAndFeed;
+  private final ParallelShootAndFeed parallelShootAndFeed;
+  */
+
   private final SeekLeft seekLeft;
   private final SeekRight seekRight;
   private final GetInRange getInRange;
@@ -88,6 +97,19 @@ public class RobotContainer {
     //driveMec.addRequirements(mecDriveTrain);
     //mecDriveTrain.setDefaultCommand(driveMec);
 
+    /*
+    shooter = new Shooter();
+    feeder = new Shooter();
+    shoot = new Shoot(shooter);
+    shoot.addRequirements(shooter);
+    feed = new Feed(shooter);
+    feed.addRequirements(shooter);
+    shootAndFeed = new ShootAndFeed(shooter, feeder);
+    shootAndFeed.addRequirements(shooter, feeder);
+    parallelShootAndFeed = new ParallelShootAndFeed(shooter, feeder);
+    parallelShootAndFeed.addRequirements(shooter, feeder);
+    */
+
     seekLeft = new SeekLeft(driveTrain);
     seekLeft.addRequirements(driveTrain);
     //seekLeft.addRequirements(limelight);
@@ -122,7 +144,7 @@ public class RobotContainer {
 
     chooser.addOption("Auton Barrel Roll", autonBarrelRoll);
     chooser.addOption("Auton Bounce Path", autonBouncePath);
-    chooser.setDefaultOption("Move (is default)", move);
+    chooser.setDefaultOption("Move (default)", move);
     SmartDashboard.putData("Auton Chooser", chooser);
 
     configureButtonBindings();
@@ -185,7 +207,11 @@ public class RobotContainer {
 
     final JoystickButton moveStraightButton = new JoystickButton(driverController, Constants.moveStraightButton);
     moveStraightButton.whenPressed(new MoveStraight(driveTrain, 0.3, 5));
+
+    //final JoystickButton shootAndFeedButton = new JoystickButton(driverController, Constants.shootAndFeedButton);
+    //shootAndFeedButton.whenPressed(new ParallelShootAndFeed(shooter, feeder));
   }
+  
 
 
   /**
