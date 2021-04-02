@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
   public static RobotContainer robotContainer;
   public static String trajectoryJSON;
   public static Path testPath;
-  public static Trajectory testTrajectory;
+  public static Trajectory testTrajectory; 
 
   /**
    * This function is run when the robot is first started up and should be used for any
