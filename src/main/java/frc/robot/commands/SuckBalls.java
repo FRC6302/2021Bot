@@ -37,7 +37,7 @@ Intake intake;
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.stopIntakeMotor();
+    intake.stopIntakeMotor(); 
   }
 
   // Returns true when the command should end.

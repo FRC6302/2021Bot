@@ -6,14 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -26,19 +23,19 @@ public class Shooter extends SubsystemBase {
   
   TalonSRX motorFeeder;
 
-  Encoder leftLEncoder;
+  /*Encoder leftLEncoder;
   Encoder leftREncoder;
   Encoder rightLEncoder;
-  Encoder rightREncoder;
+  Encoder rightREncoder;*/
   //MIGHT NEED TWO ENCODERS ONLY
 
-  final double dpp = Math.PI * 6 / 1024; //blue wheel diam should be 6
+  final double dpp = Math.PI * 6 / 1024; //blue wheel diam should be 6 inches
   /*
   Distance Per Pulse (dpp) calculation explanation:
   distance per pulse is pi * (wheel diameter / counts per revolution) according to Andymark example code
   counts per rev is 1024 for our encoder according to Andymark example code
   */
-  final double maxEncoderRate = ((18730 / (3.75 * 60)) * 6 * Math.PI * dpp); //around 28.9
+  //final double maxEncoderRate = ((18730 / (3.75 * 60)) * 6 * Math.PI * dpp); //around 28.9
   //TO DO: compare this to actual encoder output at max motor speed
   /*
   max encoder rate calculation explanation:
@@ -56,7 +53,7 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   public Shooter() {
-    motorLeftLShooter = new TalonSRX(Constants.motorLeftLShooterValue);
+    /*motorLeftLShooter = new TalonSRX(Constants.motorLeftLShooterValue);
     motorLeftRShooter = new TalonSRX(Constants.motorLeftRShooterValue);
     motorRightLShooter = new TalonSRX(Constants.motorRightLShooterValue);
     motorRightRShooter = new TalonSRX(Constants.motorRightRShooterValue);
@@ -66,15 +63,15 @@ public class Shooter extends SubsystemBase {
     leftLEncoder = new Encoder(90, 91); //I put random numbers on all these
     leftREncoder = new Encoder(92, 93); 
     rightLEncoder = new Encoder(94, 95); 
-    rightREncoder = new Encoder(96, 97);
+    rightREncoder = new Encoder(96, 97);*/
     //THESE NUMBERS ARE DIO PINS ON THE RIO IM PRETTY SURE. TO DO: FIGURE THIS OUT BEFORE RUNNING ENCODERS
 
     //distance per pulse is pi * (wheel diameter / counts per revolution) according to Andymark example code
     //counts per rev is 1024 for our encoder according to Andymark example code
-    leftLEncoder.setDistancePerPulse(dpp);
+    /*leftLEncoder.setDistancePerPulse(dpp);
     leftREncoder.setDistancePerPulse(dpp);
     rightLEncoder.setDistancePerPulse(dpp);
-    rightREncoder.setDistancePerPulse(dpp);
+    rightREncoder.setDistancePerPulse(dpp);*/
   }
 
   @Override
@@ -104,7 +101,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setShooterMotorsWith2Encoders(double speed){
-    //pseudocode:
+    /*//pseudocode:
     //already have left and right followers following their master(their master's auxillary output?)
       //left motors are negative so both wheels turn inward and shoot the ball
     motorLeftLShooter.set(ControlMode.PercentOutput, -speed);
@@ -134,7 +131,7 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("rightLEncoderRate", rightLEncoderRate);
 
     //if right master speed output is not with specific range of left master, 
-      //then adjust the speed of right master somehow (with a calculation?)
+      //then adjust the speed of right master somehow (with a calculation?)*/
   }
 
   public void setLeftShooterMotors(double speed){
@@ -167,7 +164,7 @@ public class Shooter extends SubsystemBase {
   }
 
   //TO DO: COMBINE THESE GET METHODS SOMEHOW
-  public double getLeftLEncoderRate(){
+  /*public double getLeftLEncoderRate(){
     return leftLEncoder.getRate(); //returns inches per second i believe cuz of using inches in dpp
   }
 
@@ -181,5 +178,5 @@ public class Shooter extends SubsystemBase {
 
   public double getRightREncoderRate(){
     return rightREncoder.getRate(); //returns inches per second i believe cuz of using inches in dpp
-  }
+  }*/
 }

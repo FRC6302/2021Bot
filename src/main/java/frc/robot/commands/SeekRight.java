@@ -21,7 +21,7 @@ public class SeekRight extends CommandBase {
   private boolean finished = false;
 
   /**
-   * Creates a new SeekLeft.
+   * Creates a new SeekRight.
    */
   public SeekRight(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.

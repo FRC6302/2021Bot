@@ -24,9 +24,10 @@ public class AutonBarrelRoll extends SequentialCommandGroup {
       new Move(driveTrain, 0.5, 0.2, 4.15),
       new Move(driveTrain, 0.6, 0.6, 0.5)); */
 
-      super(new MoveStraight(driveTrain, 0.8, 1.15), //straight up to the first turn 
+      /*super(new MoveStraight(driveTrain, 0.8, 1.15), //straight up to the first turn 
       new Move(driveTrain, 0.6, 0.23, 3.2), //turns around first cone
       new Move(driveTrain, 0.7, 0.5, 0.1), //acts as a buffer so the robot doesnt jerk as much
-      new MoveStraight(driveTrain, 0.8, 0.3)); //moves to second cone
+      new MoveStraight(driveTrain, 0.8, 0.3)); //moves to second cone*/
+      super(new MoveDistance(driveTrain, 2, 0.8));
   }
 }

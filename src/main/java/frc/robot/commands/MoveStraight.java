@@ -61,7 +61,7 @@ public class MoveStraight extends CommandBase {
       driveTrain.setLeftMotors(leftCommand);
       driveTrain.setRightMotors(rightCommand);
     }
-    finished = true;
+    finished = true; 
   }
 
   // Called once the command ends or is interrupted.

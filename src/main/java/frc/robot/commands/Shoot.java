@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
@@ -35,7 +34,7 @@ public class Shoot extends CommandBase {
     shooter.setShooterMotors(Constants.shootSpeed);
     //shooter.setShooterMotorsWith2Encoders(Constants.shootSpeed);
     
-    double leftLEncRate = shooter.getLeftLEncoderRate();
+    /*double leftLEncRate = shooter.getLeftLEncoderRate();
     double leftREncRate = shooter.getLeftREncoderRate();
     double rightLEncRate = shooter.getRightLEncoderRate();
     double rightREncRate = shooter.getRightREncoderRate();
@@ -43,7 +42,7 @@ public class Shoot extends CommandBase {
     SmartDashboard.putNumber("LeftLEncRate", leftLEncRate);
     SmartDashboard.putNumber("LeftREncRate", leftREncRate);
     SmartDashboard.putNumber("RightLEncRate", rightLEncRate);
-    SmartDashboard.putNumber("RightREncRate", rightREncRate);
+    SmartDashboard.putNumber("RightREncRate", rightREncRate);*/
   }
 
   // Called once the command ends or is interrupted.

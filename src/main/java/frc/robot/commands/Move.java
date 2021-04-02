@@ -22,12 +22,14 @@ public class Move extends CommandBase {
 
   //default move command. runs if only the DriveTrain paramater is inputted to the command when it is called
   public Move(DriveTrain driveTrain) {
-    this.driveTrain = driveTrain;
+    /*this.driveTrain = driveTrain;
     addRequirements(driveTrain);
     timer = new Timer();
     moveTime = Constants.MoveTime;  
     leftCommand = Constants.leftMotorsMoveSpeed;
-    rightCommand = Constants.rightMotorsMoveSpeed;  
+    rightCommand = Constants.rightMotorsMoveSpeed;*/ 
+
+    this(driveTrain, Constants.leftMotorsMoveSpeed, Constants.rightMotorsMoveSpeed, Constants.MoveTime);
   }  
 
   //runs when all 4 paramaters are inputted in to the command call
@@ -40,7 +42,12 @@ public class Move extends CommandBase {
     this.moveTime = moveTime; 
   }  
 
-  public Move(DriveTrain driveTrain, double distance) {
+  public Move(DriveTrain driveTrain, double distance, double speed) {
+    /*pseudocode:
+    get average of distance travelled
+    left command = speed * curDistance / endDistance ?
+    make a seperate move distance command
+    */
     
   }
 

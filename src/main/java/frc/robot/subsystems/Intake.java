@@ -30,7 +30,7 @@ TalonSRX motorIntake;
   }
 
   public void setIntakeMotor(double speed) {
-    motorIntake.set(ControlMode.PercentOutput, speed);
+    motorIntake.set(ControlMode.PercentOutput, -speed);
   }
 
   public void stopIntakeMotor() {
